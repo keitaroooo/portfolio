@@ -4,49 +4,102 @@
   display: flex;
   /* ブロック整形コンテキストからはみ出た要素を隠す */
   overflow: hidden;
-  color: #aa8f7b;
+  color: #ffffff;
   font-family: "Josefin Sans", sans-serif;
+  text-shadow: 0 0 30px rgba(170, 143, 123, 1);
+  margin-bottom: 40px;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .title span {
   /* title class内のspan要素はブロック要素を生成し，通常のフローでは前後に改行が挿入される */
   display: block;
-  /* x軸はそのままで，y軸方向に親要素の1.05倍移動 */
-  /* 親要素のコンテンツ領域の高さはspan要素の高さと同じだから，span要素はtitle classの下にtitle classの高さの0.05倍だけ移動した位置に配置され，表示されなくなる */
-  transform: translate(0, 105%);
-  transition: transform cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;
+  /* 3D変形を有効にする */
+  transform-style: preserve-3d;
+  /* 初期状態：3D空間で回転しながらスケールが0 */
+  transform: rotateY(-90deg) translateZ(-50px) scale(0);
+  transition: transform cubic-bezier(0.215, 0.61, 0.355, 1) 0.8s;
+  opacity: 0;
 }
 
 .title.-visible span {
-  transform: translate(0, 0);
+  transform: rotateY(0deg) translateZ(0px) scale(1);
+  opacity: 1;
 }
 
 .title span:nth-child(2) {
-  transition-delay: 0.06s;
+  transition-delay: 0.1s;
+  color: #ff9a9e;
 }
+
 .title span:nth-child(3) {
-  transition-delay: 0.12s;
+  transition-delay: 0.2s;
+  color: #fecfef;
 }
+
 .title span:nth-child(4) {
-  transition-delay: 0.18s;
+  transition-delay: 0.3s;
+  color: #fecfef;
 }
+
 .title span:nth-child(5) {
-  transition-delay: 0.24s;
+  transition-delay: 0.4s;
+  color: #a8edea;
 }
+
 .title span:nth-child(6) {
-  transition-delay: 0.30s;
+  transition-delay: 0.5s;
+  color: #fed6e3;
 }
+
 .title span:nth-child(7) {
-  transition-delay: 0.36s;
+  transition-delay: 0.6s;
+  color: #ff9a9e;
 }
+
 .title span:nth-child(8) {
-  transition-delay: 0.42s;
+  transition-delay: 0.7s;
+  color: #a8edea;
 }
+
 .title span:nth-child(9) {
-  transition-delay: 0.48s;
+  transition-delay: 0.8s;
+  color: #d299c2;
 }
+
 .title span:nth-child(10) {
-  transition-delay: 0.54s;
+  transition-delay: 0.9s;
+  color: #89f7fe;
+}
+
+/* ホバーエフェクト */
+.title span:hover {
+  transform: rotateY(15deg) translateZ(20px) scale(1.2);
+  text-shadow: 0 0 40px rgba(255, 255, 255, 0.8);
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* パルスエフェクト */
+@keyframes titlePulse {
+
+  0%,
+  100% {
+    text-shadow: 0 0 30px rgba(170, 143, 123, 1);
+  }
+
+  50% {
+    text-shadow: 0 0 50px rgba(170, 143, 123, 1), 0 0 80px rgba(255, 255, 255, 0.5);
+  }
+}
+
+.title.-visible span {
+  animation: titlePulse 3s ease-in-out infinite;
 }
 
 body {
@@ -63,4 +116,138 @@ body {
   align-items: center;
   /* マージン領域を0にする */
   margin: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  font-family: "Josefin Sans", sans-serif;
+  position: relative;
+  z-index: 1;
+}
+
+main {
+  background: rgba(0, 0, 0, 0.85);
+  padding: 40px;
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  max-width: 800px;
+  margin: 20px;
+}
+
+h1 {
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(170, 143, 123, 0.8);
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: #aa8f7b;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #e0e0e0;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+ul {
+  color: #e0e0e0;
+  line-height: 1.6;
+}
+
+a {
+  color: #aa8f7b;
+  text-decoration: none;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+a:hover {
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(170, 143, 123, 0.8);
+}
+
+.title {
+  display: flex;
+  /* ブロック整形コンテキストからはみ出た要素を隠す */
+  overflow: hidden;
+  color: #ffffff;
+  font-family: "Josefin Sans", sans-serif;
+  text-shadow: 0 0 30px rgba(170, 143, 123, 1);
+  margin-bottom: 40px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  main {
+    padding: 20px;
+    margin: 10px;
+    border-radius: 15px;
+  }
+
+  .title {
+    font-size: 0.8em;
+    margin-bottom: 30px;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
+
+  h2 {
+    font-size: 1.2em;
+  }
+
+  p,
+  ul {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  main {
+    padding: 15px;
+    margin: 5px;
+    border-radius: 10px;
+  }
+
+  .title {
+    font-size: 0.6em;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  h1 {
+    font-size: 1.2em;
+  }
+
+  h2 {
+    font-size: 1em;
+  }
+
+  p,
+  ul {
+    font-size: 0.8em;
+  }
+}
+
+/* WebGL Canvas Performance Optimization */
+@media (prefers-reduced-motion: reduce) {
+
+  #particle-canvas,
+  #shader-canvas,
+  #particle-3d-canvas {
+    animation: none !important;
+  }
+}
+
+/* Fallback for non-WebGL browsers */
+.no-webgl main {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border: 1px solid rgba(170, 143, 123, 0.3);
+}
+
+/* 3D Canvas specific styles */
+#particle-3d-canvas {
+  mix-blend-mode: screen;
 }
