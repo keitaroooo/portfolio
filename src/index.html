@@ -79,8 +79,6 @@
   <!-- アイコン -->
 
   <!-- 従来のブラウザ用の32×32pxのファビコン -->
-  <!-- <link rel="icon" href="favicon.ico" /> -->
-  <!-- svgファビコンを設定する -->
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <!-- 　Appleデバイスのホーム画面に表示される180×180pxのアイコン -->
   <link rel="apple-touch-icon" href="icon.svg" />
@@ -174,6 +172,7 @@
     <p><a href="https://blog.keitaroooo.com" target="_blank" rel="noopener">Blog</a></p>
     <p><a href="https://play.google.com/store/apps/details?id=com.Keitarooo.maze&hl=ja" target="_blank"
         rel="noopener">Huge Maze</a></p>
+    <p><a href="cube.html" style="color: #aa8f7b;">WebGL 3D Cube Demo →</a></p>
   </main>
 
   <!-- ページ下部のフッターエリア． -->
@@ -197,6 +196,21 @@
   <!-- jQueryライブラリを読み込む-->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+  <!-- Service Worker登録 -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('SW registered: ', registration);
+          })
+          .catch(registrationError => {
+            console.log('SW registration failed: ', registrationError);
+          });
+      });
+    }
+  </script>
 
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
   <script>
