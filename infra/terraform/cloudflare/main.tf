@@ -2,8 +2,6 @@ provider "cloudflare" {
   api_token = var.cloudflare_api_token
 }
 
-# Records are based on the Cloudflare zone export (2026-02-15).
-
 resource "cloudflare_dns_record" "apex_a" {
   zone_id  = var.zone_id
   name     = "@"
@@ -58,9 +56,6 @@ resource "cloudflare_dns_record" "google_site_verification" {
 }
 
 # Cloudflare Pages Project
-# 既存プロジェクトを import する場合:
-# terraform import cloudflare_pages_project.portfolio <account_id>/portfolio
-
 resource "cloudflare_pages_project" "portfolio" {
   account_id        = var.cloudflare_account_id
   name              = "portfolio"
