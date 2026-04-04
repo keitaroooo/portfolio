@@ -2,60 +2,9 @@ provider "cloudflare" {
   api_token = var.cloudflare_api_token
 }
 
-resource "cloudflare_dns_record" "apex_a" {
-  zone_id  = var.zone_id
-  name     = "@"
-  type     = "A"
-  ttl      = 1
-  content  = var.apex_a_value
-  proxied  = false
-}
-
-resource "cloudflare_dns_record" "blog" {
-  zone_id  = var.zone_id
-  name     = "blog"
-  type     = "CNAME"
-  ttl      = 1
-  content  = var.blog_netlify_target
-  proxied  = true
-}
-
-resource "cloudflare_dns_record" "techblog" {
-  zone_id  = var.zone_id
-  name     = "techblog"
-  type     = "CNAME"
-  ttl      = 1
-  content  = var.techblog_vercel_target
-  proxied  = true
-}
-
-resource "cloudflare_dns_record" "traefik" {
-  zone_id  = var.zone_id
-  name     = "traefik"
-  type     = "CNAME"
-  ttl      = 1
-  content  = "keitaroooo.com"
-  proxied  = false
-}
-
-resource "cloudflare_dns_record" "www" {
-  zone_id  = var.zone_id
-  name     = "www"
-  type     = "CNAME"
-  ttl      = 1
-  content  = var.www_pages_target
-  proxied  = true
-}
-
-resource "cloudflare_dns_record" "google_site_verification" {
-  zone_id = var.zone_id
-  name    = "@"
-  type    = "TXT"
-  ttl     = 1
-  content = var.google_site_verification
-}
-
 # Cloudflare Pages Project
+# サイト自体のデプロイ設定を管理する。DNS レコード（www 以外）は keitaro-yamaguchi リポジトリで管理。
+
 resource "cloudflare_pages_project" "portfolio" {
   account_id        = var.cloudflare_account_id
   name              = "portfolio"
@@ -64,11 +13,11 @@ resource "cloudflare_pages_project" "portfolio" {
   source = {
     type = "github"
     config = {
-      owner                         = "keitaroooo"
-      repo_name                     = "portfolio"
-      production_branch             = "main"
+      owner                          = "keitaroooo"
+      repo_name                      = "portfolio"
+      production_branch              = "main"
       production_deployments_enabled = true
-      preview_deployment_setting    = "all"
+      preview_deployment_setting     = "all"
     }
   }
 
@@ -95,4 +44,3 @@ resource "cloudflare_pages_domain" "www" {
   project_name = cloudflare_pages_project.portfolio.name
   name         = "www.keitaroooo.com"
 }
-
