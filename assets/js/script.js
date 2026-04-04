@@ -1,10 +1,16 @@
 const CLASSNAME = "-visible";
-const TIMEOUT = 1500;
+const TIMEOUT = 3000;
 const $target = $(".title");
 
-setInterval(() => {
+// ページ読み込み時に一度だけアニメーションを実行
+setTimeout(() => {
   $target.addClass(CLASSNAME);
+}, 500);
+
+// リピートアニメーションは10秒ごとに実行
+setInterval(() => {
+  $target.removeClass(CLASSNAME);
   setTimeout(() => {
-    $target.removeClass(CLASSNAME);
-  }, TIMEOUT);
-}, TIMEOUT * 2);
+    $target.addClass(CLASSNAME);
+  }, 100);
+}, 10000);
