@@ -24,7 +24,7 @@ resource "cloudflare_pages_project" "portfolio" {
   build_config = {
     build_command   = ""
     destination_dir = ""
-    root_dir        = ""
+    root_dir        = "src"
   }
 
   deployment_configs = {
