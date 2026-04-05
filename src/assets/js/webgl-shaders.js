@@ -76,9 +76,9 @@ class ShaderBackground {
                 float noiseVal = (n1 + n2 + n3) / 3.0;
                 
                 // 追加アニメーション: 動的な色相変化
-                float hue = 0.6 + combinedWave * 0.3 + noiseVal * 0.15 + sin(u_time * 0.5) * 0.1;
-                float saturation = 0.4 + dist * 0.3 + sin(u_time * 0.3) * 0.1;
-                float brightness = 0.15 + combinedWave * 0.25 + sin(u_time * 0.7) * 0.05;
+                float hue = 0.72 + combinedWave * 0.08 + noiseVal * 0.05 + sin(u_time * 0.5) * 0.03;
+                float saturation = 0.15 + dist * 0.1 + sin(u_time * 0.3) * 0.03;
+                float brightness = 0.35 + combinedWave * 0.15 + sin(u_time * 0.7) * 0.03;
                 
                 vec3 color = hsv2rgb(vec3(hue, saturation, brightness));
                 

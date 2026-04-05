@@ -1,3 +1,4 @@
+// --- Title Animation ---
 const CLASSNAME = "-visible";
 const TIMEOUT = 3000;
 const $target = $(".title");

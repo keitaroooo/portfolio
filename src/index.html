@@ -79,8 +79,6 @@
   <!-- アイコン -->
 
   <!-- 従来のブラウザ用の32×32pxのファビコン -->
-  <!-- <link rel="icon" href="favicon.ico" /> -->
-  <!-- svgファビコンを設定する -->
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <!-- 　Appleデバイスのホーム画面に表示される180×180pxのアイコン -->
   <link rel="apple-touch-icon" href="icon.svg" />
@@ -141,16 +139,14 @@
       <span>O</span>
       <span>O</span>
     </h1>
+
     <h1>About</h1>
     <p>🌱I’m currently learning mechanical engineering.</p>
     <p>💻 I'm interested in electrical engineering and computer science.</p>
     <h1>Interests</h1>
-    <ul>
-      <li>Comedy</li>
-      <li>Sports</li>
-      <li>Trip</li>
-      <li>Creating</li>
-    </ul>
+    <div class="interests-cube-container">
+      <canvas id="interests-cube"></canvas>
+    </div>
     <h1>Background</h1>
     <h2>2020.4&ndash;</h2>
     <p>Nishikawa Laboratory, Graduate School of Engineering Science, Osaka University</p>
@@ -184,19 +180,33 @@
   <!-- nomoduleを設定することでmoduleをサポートしていないブラウザを対象にJavaScriptを提供する． -->
   <!-- <script src="assets/js/xy-polyfill.js" nomodule></script> -->
 
-  <!-- type="module"のJavaScriptは，moduleをサポートするブラウザでのみ実行される -->
-  <!--- defer属性を指定すると，HTMLの解析と，スクリプトの読み込みを非同期に並行して行うが，スクリプトの実行は，HTMLの解析が完了した後で行われる -->
-  <!-- type属性は省略するとtext/javascriptになる -->
-  <!-- CORSエラーを回避 -->
+  <!-- jQueryライブラリ -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- gl-matrixライブラリ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"></script>
+
   <script src="assets/js/script.js" type="text/javascript" defer></script>
   <!-- WebGL Effects -->
   <script src="assets/js/webgl-fallback.js" type="text/javascript" defer></script>
   <script src="assets/js/webgl-shaders.js" type="text/javascript" defer></script>
   <script src="assets/js/webgl-particles.js" type="text/javascript" defer></script>
   <script src="assets/js/webgl-3d.js" type="text/javascript" defer></script>
-  <!-- jQueryライブラリを読み込む-->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="assets/js/webgl-interests-cube.js" type="text/javascript" defer></script>
+
+  <!-- Service Worker登録 -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('SW registered: ', registration);
+          })
+          .catch(registrationError => {
+            console.log('SW registration failed: ', registrationError);
+          });
+      });
+    }
+  </script>
 
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
   <script>
