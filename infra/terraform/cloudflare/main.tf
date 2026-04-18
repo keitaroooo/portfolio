@@ -5,6 +5,16 @@ provider "cloudflare" {
 # Cloudflare Pages Project
 # サイト自体のデプロイ設定を管理する。DNS レコード（www 以外）は keitaro-yamaguchi リポジトリで管理。
 
+import {
+  to = cloudflare_pages_project.portfolio
+  id = "portfolio"
+}
+
+import {
+  to = cloudflare_pages_domain.www
+  id = "portfolio/www.keitaroooo.com"
+}
+
 resource "cloudflare_pages_project" "portfolio" {
   account_id        = var.cloudflare_account_id
   name              = "portfolio"
